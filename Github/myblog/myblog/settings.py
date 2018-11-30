@@ -11,6 +11,10 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
+# 导入mysql模型
+import pymysql
+pymysql.install_as_MySQLdb()
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -24,8 +28,8 @@ SECRET_KEY = '#4a(_o$+(+r(egci+hha7)!ek!e&3z=$jgz-_r#dp8#&8s5bse'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
-ALLOWED_HOSTS = []
+# 允许所有人访问
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -61,7 +65,7 @@ ROOT_URLCONF = 'myblog.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['template'],     # 增加首页视图
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -80,10 +84,17 @@ WSGI_APPLICATION = 'myblog.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
+# 数据库连接
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'HOST': 'localhost',    # 数据库ip
+        'PORT': '3306',         # 端口
+        'NAME': 'myblog',       # 数据库名称
+        'USER': 'root',         # 连接用户
+        'PASSWORD': '123456'    # 连接密码
+        # 'ENGINE': 'django.db.backends.sqlite3',   # 默认sqlite3测试数据库
+        # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 
@@ -109,10 +120,10 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
-
-LANGUAGE_CODE = 'en-us'
-
-TIME_ZONE = 'UTC'
+# 定义为中文
+LANGUAGE_CODE = 'zh-Hans'
+# 定义时区为上海
+TIME_ZONE = 'Asia/Shanghai'
 
 USE_I18N = True
 
@@ -125,3 +136,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
+# 添加静态文件static
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static')
+]

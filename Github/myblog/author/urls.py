@@ -1,4 +1,4 @@
-# 图片路由模块
+# 作者路由模块
 from django.conf.urls import url
 
 urlpatterns = [

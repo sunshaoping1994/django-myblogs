@@ -16,6 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.conf.urls import url, include
+from . import views
+
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -27,4 +29,6 @@ urlpatterns = [
     url(r'^comment/', include('comment.urls')),
     url(r'^message/', include('message.urls')),
     url(r'^photo/', include('photo.urls')),
+    # 添加根网页路由
+    url(r'^$', views.index, name='index')
 ]
