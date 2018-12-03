@@ -44,16 +44,22 @@
                     <ul class="dropdown-menu">
                         <li><a href="/">博客首页</a></li>
                         <li><a href="/author/{{request.session.login_user}}/info/">查看个人资料</a></li>
-                        <li><a href="/">完善个人资料</a></li>
-                        <li><a href="/">修改登录密码</a></li>
-                        <li><a href="/">发表文章</a></li>
-                        <li><a href="/">创建相册</a></li>
-                        <li><a href="/">查看我的文章</a></li>
-                        <li><a href="/">查看我的相册</a></li>
-                        <li><a href="/">查看我的留言板</a></li>
-                        <li><a href="/">安全退出</a></li>
+                        <li><a href="/author/update/">完善个人资料</a></li>
+                        <li><a href="/author/password/">修改登录密码</a></li>
+                        <li><a href="/article/publish/">发表文章</a></li>
+                        <li><a href="/album/album_create/">创建相册</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="/article/{{request.session.login_user.id}}/">查看我的文章</a></li>
+                        <li><a href="/album/{{request.session.login_user.id}}/">查看我的相册</a></li>
+                        <li><a href="/message/{{request.session.login_user.id}}/">查看我的留言板</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="/author/logout/">安全退出</a></li>
                     </ul>
                 </li>
+                {% else %}
+                <li><a href="/author/login/">登录</a></li>
+                <li><a href="/author/register/">新用户注册</a></li>
+                {% endif %}
             </ul>
         </div>
     </div>
