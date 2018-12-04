@@ -36,12 +36,12 @@ def author_register(request):
         except:
             # 判断用户两次输入密码是否一致
             if userpass != re_userpass:
-                render(request, 'author/register.html', {'error_msg': '两次输入密码不一致，请重新输入'})
+                return render(request, 'author/register.html', {'error_msg': '两次输入密码不一致，请重新输入'})
             # 保存用户信息
             author = models.Author(username=username, userpass=userpass, realname=realname)
             author.save()
             # 注册成功，跳转到登录页面
-            render(request, 'author/login.html', {'error_msg': '账号注册成功，请登录'})
+            return render(request, 'author/login.html', {'error_msg': '账号注册成功，请登录'})
 
 def author_login(request):
     """
