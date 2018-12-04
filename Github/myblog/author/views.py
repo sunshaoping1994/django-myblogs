@@ -31,8 +31,8 @@ def author_register(request):
         # 判断用户信息
         try:
             # 判断用户名是否已经存在
-            author = models.Author.objects.get(pk=username)
-            return render(request, 'author/register.html', {'error_msg': '用户名已存在，请重新输入'})
+            author = models.Author.objects.get(username=username)
+            return render(request, 'author/register.html', {'error_msg': '账号已存在，请重新输入'})
         except:
             # 判断用户两次输入密码是否一致
             if userpass != re_userpass:
@@ -42,6 +42,7 @@ def author_register(request):
             author.save()
             # 注册成功，跳转到登录页面
             return render(request, 'author/login.html', {'error_msg': '账号注册成功，请登录'})
+
 
 def author_login(request):
     """
@@ -58,13 +59,15 @@ def author_login(request):
         # 验证用户名和密码
         try:
             author = models.Author.objects.get(username=username, userpass=userpass)
+            print(author, type(author))
             # 浏览器中记录用户session
             request.session['login_user'] = author
             # 浏览器关闭自动清除session
             request.session.set_expiry(0)
-            return render(request, 'index.html', {})
+            return redirect('/')
         except:
             return render(request, 'author/login.html', {'error_msg': '用户账户或密码不正确，请重新输入'})
+
 
 def author_logout(request):
     """
