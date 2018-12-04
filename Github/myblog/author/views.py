@@ -64,7 +64,8 @@ def author_login(request):
             # 浏览器关闭自动清除session
             request.session.set_expiry(0)
             print(author, type(author))
-            return redirect('/')
+            # return redirect('/')
+            return render(request, 'index.html')
         except:
             return render(request, 'author/login.html', {'error_msg': '用户账户或密码不正确，请重新输入'})
 
