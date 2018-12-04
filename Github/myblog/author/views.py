@@ -59,11 +59,11 @@ def author_login(request):
         # 验证用户名和密码
         try:
             author = models.Author.objects.get(username=username, userpass=userpass)
-            print(author, type(author))
             # 浏览器中记录用户session
             request.session['login_user'] = author
             # 浏览器关闭自动清除session
             request.session.set_expiry(0)
+            print(author, type(author))
             return redirect('/')
         except:
             return render(request, 'author/login.html', {'error_msg': '用户账户或密码不正确，请重新输入'})
