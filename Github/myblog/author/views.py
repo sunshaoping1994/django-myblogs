@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponsePermanentRedirect
+from django.http import HttpResponseRedirect
 from . import models
 
 
@@ -59,13 +59,13 @@ def author_login(request):
         # 验证用户名和密码
         try:
             author = models.Author.objects.get(username=username, userpass=userpass)
-            # 浏览器中记录用户session
+            # 账号+密码正确,在session中记录用户
             request.session['login_user'] = author
-            # 浏览器关闭自动清除session
+            # 浏览器关闭时session过期销毁：相当于用户退出
             request.session.set_expiry(0)
             print(author, type(author))
-            # return redirect('/')
-            return render(request, 'index.html')
+            return redirect('/')
+            # return render(request, 'index.html')
         except:
             return render(request, 'author/login.html', {'error_msg': '用户账户或密码不正确，请重新输入'})
 
