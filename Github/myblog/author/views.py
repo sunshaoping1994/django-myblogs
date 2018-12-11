@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
+from django.urls import reverse
 from . import models
 
 
@@ -63,9 +64,9 @@ def author_login(request):
             request.session['login_user'] = author
             # 浏览器关闭时session过期销毁：相当于用户退出
             request.session.set_expiry(0)
-            print(author, type(author))
+            # print(author, type(author))
             return redirect('/')
-            # return render(request, 'index.html')
+            # return render(request, 'index.html', {"author": author})
         except:
             return render(request, 'author/login.html', {'error_msg': '用户账户或密码不正确，请重新输入'})
 
