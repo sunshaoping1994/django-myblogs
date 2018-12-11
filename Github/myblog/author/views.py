@@ -81,6 +81,17 @@ def author_logout(request):
     return redirect('/')
 
 
+def author_info(request, author_id):
+    """
+    查看用户个人资料
+    :param request:
+    :param author_id:
+    :return:
+    """
+    if request.method == "GET":
+        author = models.Author.objects.get(pk=author_id)
+        return render(request, 'author/info.html', {'author': author})
+
 
 
 
