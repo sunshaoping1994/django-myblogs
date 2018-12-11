@@ -12,4 +12,6 @@ urlpatterns = [
     url(r'^(?P<author_id>\d+)/$', views.author_index, name='author_index'),
     # 用户退出
     url(r'^logout/$', views.author_logout, name='author_logout'),
+    # 查看个人资料
+    url(r'^(?P<author_id>\d+)/info/$', views.author_info, name='author_info'),
 ]
