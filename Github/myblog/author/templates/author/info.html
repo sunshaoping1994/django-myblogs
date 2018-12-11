@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>个人资料</title>
+    <link rel="icon" href="/static/images/favicon.png">
+    <!-- 引入需要的模块 -->
+    <link rel="stylesheet" href="/static/js/lib/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/index.css">
+    <script src="/static/js/lib/jquery/jquery-2.2.4.js"></script>
+    <script src="/static/js/lib/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+</head>
+<body>
+<!--页头导航条-->
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">首页</span>
+            </button>
+            <a class="navbar-brand" href="/">首页</a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="/">加林博客<span class="sr-only">(current)</span></a></li>
+                {% if request.session.login_user %}
+                    <li><a href="/author/{{ request.session.login_user.id }}/">我的首页</a></li>
+                    <li><a href="/article/{{ request.session.login_user.id }}/">我的文章</a></li>
+                    <li><a href="/album/{{ request.session.login_user.id }}/">我的相册</a></li>
+                    <li><a href="/message/{{ request.session.login_user.id }}/">我的留言板</a></li>
+                {% endif %}
+            </ul>
+            <form class="navbar-form navbar-left">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="请输入搜索关键字">
+                </div>
+                <button type="submit" class="btn btn-default">点击搜索</button>
+            </form>
+            <ul class="nav navbar-nav navbar-right">
+                {% if request.session.login_user %}
+                    <li><a>尊敬的用户{{ requset.session.login_user.realname }}, 欢迎本网站</a></li>
+                    <li><a href="/author/logout/">安全退出</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="botton" aria-haspopup="true"
+                           aria-expanded="false">网站导航<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/">博客首页</a></li>
+                            <li><a href="/author/{{ request.session.login_user }}/info/">查看个人资料</a></li>
+                            <li><a href="/author/update/">完善个人资料</a></li>
+                            <li><a href="/author/password/">修改登录密码</a></li>
+                            <li><a href="/article/publish/">发表文章</a></li>
+                            <li><a href="/album/album_create/">创建相册</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="/article/{{ request.session.login_user.id }}/">查看我的文章</a></li>
+                            <li><a href="/album/{{ request.session.login_user.id }}/">查看我的相册</a></li>
+                            <li><a href="/message/{{ request.session.login_user.id }}/">查看我的留言板</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="/author/logout/">安全退出</a></li>
+                        </ul>
+                    </li>
+                {% else %}
+                    <li><a href="/author/login/">登录</a></li>
+                    <li><a href="/author/register/">新用户注册</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!--页头-->
+<div class="container">
+    <div class="page-header">
+        <h1>加林课堂
+            <small>Django web</small>
+        </h1>
+    </div>
+</div>
+
+<!--路径导航-->
+<div class="container">
+    <ol class="breadcrumb">
+        <li><a href="/">博客首页</a></li>
+        <li class="active">{{ author.realname }}的个人主页</li>
+    </ol>
+</div>
+
+<!--页面主题内容-->
+<div class="container">
+    <div class="row">
+        <!--左侧导航-->
+        <div class="col-md-3">
+            <div class="panel panel-primary">
+                <div class="panel-heading"> 博主信息</div>
+                <div class="panel-body">
+                    <img class="img-thumbnail img-circle" src="/{{ author.header_img }}" alt="...">
+                    <p></p>
+                    <p class="text-muted">博主昵称：<span>{{ author.realname }}</span></p>
+                    <p class="text-muted">访问量：<span>100000</span></p>
+                    <p><a href="#" class="btn btn-default"></a></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-primary">
+            <div class="panel-heading">网站导航</div>
+            <ul class="list-group">
+                <li class="list-group-item"><a href="/">博客首页</a></li>
+                {% if request.session.login_user %}
+                <li class="list-group-item"><a href="/author/{{author.id}}/">我的首页</a></li>
+                <li class="list-group-item"><a href="/article/{{author.id}}/article_list/">我的首页</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+</body>
+</html>
