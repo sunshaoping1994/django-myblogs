@@ -24,10 +24,10 @@
             <ul class="nav navbar-nav">
                 <li class="active"><a href="/">加林博客<span class="sr-only">(current)</span></a></li>
                 {% if request.session.login_user %}
-                <li><a href="/author/{{ request.session.login_user.id }}">我的首页</a></li>
-                <li><a href="/article/{{ request.session.login_user.id }}">我的文章</a></li>
-                <li><a href="/album/{{ request.session.login_user.id }}">我的相册</a></li>
-                <li><a href="/message/{{ request.session.login_user.id }}">我的留言板</a></li>
+                <li><a href="/author/{{ request.session.login_user.id }}/">我的首页</a></li>
+                <li><a href="/article/{{ request.session.login_user.id }}/">我的文章</a></li>
+                <li><a href="/album/{{ request.session.login_user.id }}/">我的相册</a></li>
+                <li><a href="/message/{{ request.session.login_user.id }}/">我的留言板</a></li>
                 {% endif %}
             </ul>
             <form class="navbar-form navbar-left">
@@ -50,7 +50,7 @@
                         <li><a href="/article/publish/">发表文章</a></li>
                         <li><a href="/album/album_create/">创建相册</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="/article/{{request.session.login_user.id}}/">查看我的文章</a></li>
+                        <li><a href="/article/{{request.session.login_user.id}}/article_list/">查看我的文章</a></li>
                         <li><a href="/album/{{request.session.login_user.id}}/">查看我的相册</a></li>
                         <li><a href="/message/{{request.session.login_user.id}}/">查看我的留言板</a></li>
                         <li role="separator" class="divider"></li>
