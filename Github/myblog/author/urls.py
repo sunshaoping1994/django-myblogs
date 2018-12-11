@@ -9,7 +9,7 @@ urlpatterns = [
     # 用户登录
     url(r'^login/$', views.author_login, name='author_login'),
     # 个人首页
-    url(r'^(?P<author_id>)/$', views.author_index, name='author_index'),
+    url(r'^(?P<author_id>\d+)/$', views.author_index, name='author_index'),
     # 用户退出
     url(r'^logout/$', views.author_logout, name='author_logout'),
 ]
