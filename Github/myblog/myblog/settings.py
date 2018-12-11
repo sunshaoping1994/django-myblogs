@@ -140,3 +140,5 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
+# (https://www.cnblogs.com/ljwbook/p/4957841.html)
+SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
